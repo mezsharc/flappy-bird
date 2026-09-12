@@ -140,13 +140,13 @@
   const W = canvas.width;
   const H = canvas.height;
 
-  const GRAVITY = 0.45;
-  const FLAP_VELOCITY = -8;
-  const PIPE_GAP = 150;
-  const PIPE_WIDTH = 62;
-  const PIPE_SPACING = 200;
+  const GRAVITY = 0.20;
+  const FLAP_VELOCITY = -6;
+  const PIPE_GAP = 180;
+  const PIPE_WIDTH = 47;
+  const PIPE_SPACING = 300;
   const GROUND_HEIGHT = 80;
-  const PIPE_SPEED = 2.6;
+  const PIPE_SPEED = 3.0;
 
   let state = 'ready'; // ready | playing | dead
   let frames = 0;
@@ -172,9 +172,9 @@
     frames = 0;
     score = 0;
     hud.textContent = '0';
-    spawnPipe(W + 60);
-    spawnPipe(W + 60 + PIPE_SPACING);
-    spawnPipe(W + 60 + PIPE_SPACING * 2);
+    spawnPipe(W + 80);
+    spawnPipe(W + 80 + PIPE_SPACING);
+    spawnPipe(W + 80 + PIPE_SPACING * 2);
   }
 
   function spawnPipe(x) {
@@ -216,7 +216,7 @@
 
     bird.vy += GRAVITY;
     bird.y += bird.vy;
-    bird.rotation = Math.max(-0.5, Math.min(1.3, bird.vy / 10));
+    bird.rotation = Math.max(-0.15, Math.min(1.3, bird.vy / 10));
 
     groundOffset = (groundOffset + PIPE_SPEED) % 24;
 
@@ -310,7 +310,7 @@
   }
 
   const birdImage = new Image();
-  birdImage.src = '1ascz.jpg';
+  birdImage.src = '1ascz2.png';
   let birdImageLoaded = false;
   birdImage.onload = () => { birdImageLoaded = true; };
 
@@ -319,8 +319,8 @@
     ctx.translate(bird.x, bird.y);
     ctx.rotate(bird.rotation);
 
-    const imgW = 46;   // matches the source image's aspect ratio, scaled down
-    const imgH = 36;
+    const imgW = 46*2;   // matches the source image's aspect ratio, scaled down
+    const imgH = 36*2;
 
     if (birdImageLoaded) {
       ctx.drawImage(birdImage, -imgW / 2, -imgH / 2, imgW, imgH);
